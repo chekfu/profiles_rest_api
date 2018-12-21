@@ -27,7 +27,6 @@ class HelloApiView(APIView):
         """Create a hello message with our name."""
 
         serializer = serializers.HelloSerializer(data=request.data)
-
         if serializer.is_valid():
             name = serializer.data.get('name')
             message = 'Hello {0}'.format(name)
@@ -35,3 +34,18 @@ class HelloApiView(APIView):
         else:
             return Response(
                 serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def put(self, request, pk=None):
+        """Handles updating an object."""
+
+        return Response({'method': 'put'})
+
+    def patch(self, request, pk=None):
+        """Patch request, only updates fields provided in the request."""
+
+        return Response({'method': 'patch'})
+
+    def delete(self, request, pk=None):
+        """Deletes an object"""
+
+        return Response({'method': 'delete'})
