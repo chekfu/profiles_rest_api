@@ -1,9 +1,9 @@
 from django.shortcuts import render
+from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from . import serializers
-
 
 
 class HelloApiView(APIView):
@@ -30,7 +30,7 @@ class HelloApiView(APIView):
         if serializer.is_valid():
             name = serializer.data.get('name')
             message = 'Hello {0}'.format(name)
-            return  Response({'message': message})
+            return Response({'message': message})
         else:
             return Response(
                 serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -46,6 +46,22 @@ class HelloApiView(APIView):
         return Response({'method': 'patch'})
 
     def delete(self, request, pk=None):
-        """Deletes an object"""
+        """Deletes an object."""
 
         return Response({'method': 'delete'})
+
+
+class HelloViewSet(viewsets.ViewSet):
+    """Test API ViewSet."""
+
+    def list(self, request):
+        """Return a hello message."""
+
+        a_viewset = [
+            'Uses actions (list, create, retrieve, update, partial_update)',
+            'Automatically maps to URLs using Routers',
+            'Provides more functionality with less code.'
+        ]
+
+        return Response({'message': 'Hello!', 'a_viewset': a_viewset})
+
