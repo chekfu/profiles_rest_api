@@ -104,4 +104,4 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     """Handles creating, creating and updateing profiles"""
 
     serializer_class = serializers.UserProfileSerializer
-    queryser = models.UserProfile.objects.all()
+    queryset = models.UserProfile.objects.all()
